@@ -65,8 +65,21 @@ function sendMessage(instance){
     xmlhttp.open("GET", theUrl, false );
     xmlhttp.send();
 }
+
+function sendReset(instance){
+    let theUrl = 'http://' + '""" + ips[HOSTNAME] + """' + '/reset;xmlhttp=new XMLHttpRequest();
+    xmlhttp.onreadystatechange=()=>{
+        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+        {
+            updateTimes();
+        }
+    }
+    xmlhttp.open("GET", theUrl, false );
+    xmlhttp.send();
+}
 """ +
-        "</script></head><body>" +
+        f"</script></head><body>{HOSTNAME}<br>" +
+        "<input type='button' value='Reset' onclick='sendReset();' />" +
         "<input type='button' value='Event' onclick='sendEvent();' />" +
         "".join([f"<input type='button' value='Message {instance}' onclick='sendMessage(\"{instance}\");' />" for instance,ip in ips.items() if instance != HOSTNAME]) +
         "<input type='button' value='Get Clocks' onclick='updateTimes();' />" +
@@ -100,3 +113,7 @@ def message_(instance):
     app.counter.increment()
     x = requests.post(f'http://{ips[instance]}/message', data = {'timestamp': app.counter.value()})
     return f"{local_time(app.counter)}"
+
+@app.route("/reset")
+def reset():
+    app.counter.set(0)
