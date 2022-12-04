@@ -32,5 +32,5 @@ pip3 install -r /opt/app/requirements.txt
 
 # Start application
 cd /opt/app/
-#python3 -m flask run
+flask --app=server run --host=0.0.0.0 --port=80
 echo "" > sudo tee /DONE
