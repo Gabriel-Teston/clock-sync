@@ -21,11 +21,12 @@ def index():
 @app.route("/dashboard")
 def dashboard():
     return (
-        "<!doctype html><html><body>" +
-        "<br>".join([f"{instance} {f'http://{ip}/time'}"
-            for instance, ip in ips.items() if instance != HOSTNAME]) + 
+        "<!doctype html><html><head><script src='https://cdn.jsdelivr.net/npm/p5@1.5.0/lib/p5.js'></script>" + 
+        f"<script>let ips = {ips}</script>" + 
+        "</head><body>" +
         "</body></html>"
     )
+    
    
 @app.route("/time")
 def times():
