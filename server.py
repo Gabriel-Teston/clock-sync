@@ -68,7 +68,7 @@ function sendMessage(ip){
 """ +
         "</script></head><body>" +
         "<input type='button' value='Event' onclick='sendEvent();' />" +
-        "".join([f"<input type='button' value='Message {instance}' onclick='sendMessage('{ip}');' />" for instance,ip in ips.items() if instance != HOSTNAME]) +
+        "".join([f"<input type='button' value='Message {instance}' onclick='sendMessage(\"{ip}\");' />" for instance,ip in ips.items() if instance != HOSTNAME]) +
         "<input type='button' value='Get Clocks' onclick='updateTimes();' />" +
         "</body></html>"
     )
