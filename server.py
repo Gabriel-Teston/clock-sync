@@ -67,7 +67,7 @@ function sendMessage(instance){
 }
 
 function sendReset(instance){
-    let theUrl = 'http://' + '""" + ips[HOSTNAME] + """' + '/reset;xmlhttp=new XMLHttpRequest();
+    let theUrl = 'http://' + '""" + ips[HOSTNAME] + """' + '/reset';xmlhttp=new XMLHttpRequest();
     xmlhttp.onreadystatechange=()=>{
         if (xmlhttp.readyState==4 && xmlhttp.status==200)
         {
