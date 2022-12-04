@@ -20,7 +20,7 @@ def index():
 def dashboard():
     return (
         "<!doctype html><html><body>" +
-        "<br>".join([f"{instance} {requests.get(f'http://{ip}/time').text}"
+        "<br>".join([f"{instance} {f'http://{ip}/time'}"
             for instance, ip in ips.items() if instance != HOSTNAME]) + 
         "</body></html>"
     )
