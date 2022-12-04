@@ -4,19 +4,19 @@ apt-get install -yq git supervisor python3-pip python3-venv jq
 
 # Fetch source code
 mkdir /opt/app
-git clone https://github.com/ned1313/flask-voting-gcp.git /opt/app
+git clone https://github.com/Gabriel-Teston/clock-sync.git /opt/app
 
 # Python environment setup
-python3 -m venv /opt/app/votr/env
-source /opt/app/votr/env/bin/activate
-sudo curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/requirements" -H "Metadata-Flavor: Google" | sudo tee /opt/app/requirements.txt
-pip3 install -r /opt/app/requirements.txt
+python3 -m venv /opt/app/clock-sync/env
+source /opt/app/clock-sync/env/bin/activate
+# sudo curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/requirements" -H "Metadata-Flavor: Google" | sudo tee /opt/app/requirements.txt
+pip3 install -r /opt/app/clock-sync/requirements.txt
 
 
-sudo curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/flask" -H "Metadata-Flavor: Google" | sudo tee /opt/app/app.py
-sudo curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/lamport" -H "Metadata-Flavor: Google" | sudo tee /opt/app/lamport.py
-sudo curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/helloworld_pb2_grpc" -H "Metadata-Flavor: Google" | sudo tee /opt/app/helloworld_pb2_grpc.py
-sudo curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/helloworld_pb2" -H "Metadata-Flavor: Google" | sudo tee /opt/app/helloworld_pb2.py
+#sudo curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/flask" -H "Metadata-Flavor: Google" | sudo tee /opt/app/app.py
+#sudo curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/lamport" -H "Metadata-Flavor: Google" | sudo tee /opt/app/lamport.py
+#sudo curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/helloworld_pb2_grpc" -H "Metadata-Flavor: Google" | sudo tee /opt/app/helloworld_pb2_grpc.py
+#sudo curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/helloworld_pb2" -H "Metadata-Flavor: Google" | sudo tee /opt/app/helloworld_pb2.py
 
 
 #sudo apt-get update && sudo apt -y install apache2 python3-pip python3-venv
@@ -32,4 +32,4 @@ sudo curl "http://metadata.google.internal/computeMetadata/v1/instance/attribute
 
 # Start application
 cd /opt/app/
-sudo gunicorn app:app -b 0.0.0.0:80
+sudo gunicorn clock-sync.app:app -b 0.0.0.0:80
