@@ -12,6 +12,10 @@ source /opt/app/env/bin/activate
 # sudo curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/requirements" -H "Metadata-Flavor: Google" | sudo tee /opt/app/requirements.txt
 pip3 install -r /opt/app/requirements.txt
 
+export INSTANCE_A_ADRESS=$(sudo curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/instance_a_address" -H "Metadata-Flavor: Google")
+export INSTANCE_B_ADRESS=$(sudo curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/instance_b_address" -H "Metadata-Flavor: Google")
+export INSTANCE_C_ADRESS=$(sudo curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/instance_c_address" -H "Metadata-Flavor: Google")
+
 
 #sudo curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/flask" -H "Metadata-Flavor: Google" | sudo tee /opt/app/app.py
 #sudo curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/lamport" -H "Metadata-Flavor: Google" | sudo tee /opt/app/lamport.py

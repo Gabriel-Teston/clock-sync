@@ -1,13 +1,14 @@
 from flask import Flask
 from lamport import *
 import requests
+import os
 
-base_metadata_url = "http://metadata.google.internal/computeMetadata/v1/instance/attributes/"
+#base_metadata_url = "http://metadata.google.internal/computeMetadata/v1/instance/attributes/"
 
 ips = {
-    "instance-from-template-a": requests.get(f"{base_metadata_url}instance_a_address").text,
-    "instance-from-template-b": requests.get(f"{base_metadata_url}instance_b_address").text,
-    "instance-from-template-c": requests.get(f"{base_metadata_url}instance_c_address").text
+    "instance-from-template-a": os.getenv('INSTANCE_A_ADRESS'),
+    "instance-from-template-b": os.getenv('INSTANCE_B_ADRESS'),
+    "instance-from-template-c": os.getenv('INSTANCE_C_ADRESS')
 }
 
 app = Flask(__name__)
