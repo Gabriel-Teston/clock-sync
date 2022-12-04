@@ -26,7 +26,22 @@ def index():
 def dashboard():
     return (
         "<!doctype html><html><head><script src='https://cdn.jsdelivr.net/npm/p5@1.5.0/lib/p5.js'></script>" + 
-        f"<script>let ips = {ips};</script>" + 
+        f"<script>let ips = {ips};" +
+        """
+function updateTimes(){
+    for (const [key, value] of Object.entries(ips)) {
+        let theUrl = 'http://' + value + '/time';xmlhttp=new XMLHttpRequest();
+        xmlhttp.onreadystatechange=()=>{
+            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+            {
+                console.log(key, value);
+            }
+        }
+        xmlhttp.open("GET", theUrl, false );
+        xmlhttp.send();
+    }
+}""" +
+        "</script>" +
         "</head><body>" +
         "</body></html>"
     )
