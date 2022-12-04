@@ -7,10 +7,10 @@ mkdir /opt/app
 git clone https://github.com/Gabriel-Teston/clock-sync.git /opt/app
 
 # Python environment setup
-python3 -m venv /opt/app/clock-sync/env
-source /opt/app/clock-sync/env/bin/activate
+python3 -m venv /opt/app/env
+source /opt/app/env/bin/activate
 # sudo curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/requirements" -H "Metadata-Flavor: Google" | sudo tee /opt/app/requirements.txt
-pip3 install -r /opt/app/clock-sync/requirements.txt
+pip3 install -r /opt/app/requirements.txt
 
 
 #sudo curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/flask" -H "Metadata-Flavor: Google" | sudo tee /opt/app/app.py
@@ -32,4 +32,5 @@ pip3 install -r /opt/app/clock-sync/requirements.txt
 
 # Start application
 cd /opt/app/
-sudo gunicorn clock-sync.app:app -b 0.0.0.0:80
+#python3 -m flask run
+echo "" > sudo tee /DONE
