@@ -83,7 +83,19 @@ def get_event():
     event(HOSTNAME, app.counter)
     return f"{local_time(app.counter)}"
 
+@app.route("/message")
+def message():
+    if request.method == 'POST':
+
+        timestamp = int(request.form['timestamp'])
+            
+        new_value = calc_recv_timestamp(timestamp, app.counter)
+
+        app.counter.set(new_value)
+        print('Message received at ' + str(HOSTNAME)  + local_time(app.counter))
+
 @app.route("/message/<instance>")
-def message(instance):
-    send_message(f'http://{ips[instance]}', HOSTNAME, app.counter)
+def message_(instance):
+    #send_message(f'http://{ips[instance]}', HOSTNAME, app.counter)
+    x = requests.post(url, json = {'timestamp': counter.value()})
     return f"{local_time(app.counter)}"
