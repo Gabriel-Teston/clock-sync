@@ -43,7 +43,7 @@ function updateTimes(){
 }
 
 function sendEvent(){
-    let theUrl = 'http://' + """ + HOSTNAME + """ + '/event';xmlhttp=new XMLHttpRequest();
+    let theUrl = 'http://' + '""" + HOSTNAME + """' + '/event';xmlhttp=new XMLHttpRequest();
     xmlhttp.onreadystatechange=()=>{
         if (xmlhttp.readyState==4 && xmlhttp.status==200)
         {
@@ -55,7 +55,7 @@ function sendEvent(){
 }
 
 function sendMessage(ip){
-    let theUrl = 'http://' + """ + HOSTNAME + """ + '/message/' + ip;xmlhttp=new XMLHttpRequest();
+    let theUrl = 'http://' + '""" + HOSTNAME + """' + '/message/' + ip;xmlhttp=new XMLHttpRequest();
     xmlhttp.onreadystatechange=()=>{
         if (xmlhttp.readyState==4 && xmlhttp.status==200)
         {
@@ -68,7 +68,7 @@ function sendMessage(ip){
 """ +
         "</script></head><body>" +
         "<input type='button' value='Event' onclick='sendEvent();' />" +
-        "".join([f"<input type='button' value='Message {instance}' onclick='sendMessage({ip});' />" for instance,ip in ips.items()]) +
+        "".join([f"<input type='button' value='Message {instance}' onclick='sendMessage({ip});' />" for instance,ip in ips.items() if instance != HOSTNAME]) +
         "<input type='button' value='Get Clocks' onclick='getTimes();' />" +
         "</body></html>"
     )
