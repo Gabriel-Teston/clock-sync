@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 from flask_cors import CORS, cross_origin
 from lamport import *
 import requests
@@ -83,7 +83,7 @@ def get_event():
     event(HOSTNAME, app.counter)
     return f"{local_time(app.counter)}"
 
-@app.route("/message")
+@app.route("/message", methods = ['POST'])
 def message():
     if request.method == 'POST':
 
@@ -97,5 +97,6 @@ def message():
 @app.route("/message/<instance>")
 def message_(instance):
     #send_message(f'http://{ips[instance]}', HOSTNAME, app.counter)
-    x = requests.post(f'http://{ips[instance]}/message', json = {'timestamp': app.counter.value()})
+    app.counter.increment()
+    x = requests.post(f'http://{ips[instance]}/message', data = {'timestamp': app.counter.value()})
     return f"{local_time(app.counter)}"
