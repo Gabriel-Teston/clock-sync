@@ -43,7 +43,7 @@ function updateTimes(){
 }
 
 function sendEvent(){
-    let theUrl = 'http://' + """ HOSTNAME """ + '/event';xmlhttp=new XMLHttpRequest();
+    let theUrl = 'http://' + """ + HOSTNAME + """ + '/event';xmlhttp=new XMLHttpRequest();
     xmlhttp.onreadystatechange=()=>{
         if (xmlhttp.readyState==4 && xmlhttp.status==200)
         {
@@ -55,7 +55,7 @@ function sendEvent(){
 }
 
 function sendMessage(ip){
-    let theUrl = 'http://' + """ HOSTNAME """ + '/message/' + ip;xmlhttp=new XMLHttpRequest();
+    let theUrl = 'http://' + """ + HOSTNAME + """ + '/message/' + ip;xmlhttp=new XMLHttpRequest();
     xmlhttp.onreadystatechange=()=>{
         if (xmlhttp.readyState==4 && xmlhttp.status==200)
         {
