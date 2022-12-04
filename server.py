@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS, cross_origin
 from lamport import *
 import requests
 import os
@@ -12,6 +13,8 @@ ips = {
 }
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 app.counter = Counter()
 
 @app.route("/")
@@ -19,10 +22,11 @@ def index():
     return f"<!doctype html><html><body><h1>Hello if you see this than you have apache running on {HOSTNAME}!</h1></body></html>"
 
 @app.route("/dashboard")
+@cross_origin()
 def dashboard():
     return (
         "<!doctype html><html><head><script src='https://cdn.jsdelivr.net/npm/p5@1.5.0/lib/p5.js'></script>" + 
-        f"<script>let ips = {ips}</script>" + 
+        f"<script>let ips = {ips};</script>" + 
         "</head><body>" +
         "</body></html>"
     )
