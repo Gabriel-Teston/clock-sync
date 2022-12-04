@@ -34,19 +34,56 @@ function updateTimes(){
         xmlhttp.onreadystatechange=()=>{
             if (xmlhttp.readyState==4 && xmlhttp.status==200)
             {
-                console.log(key, value);
+                console.log(key, value, xmlhttp.responseText);
             }
         }
         xmlhttp.open("GET", theUrl, false );
         xmlhttp.send();
     }
-}""" +
-        "</script>" +
-        "</head><body>" +
+}
+
+function sendEvent(){
+    let theUrl = 'http://' + """ HOSTNAME """ + '/event';xmlhttp=new XMLHttpRequest();
+    xmlhttp.onreadystatechange=()=>{
+        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+        {
+            getTimes();
+        }
+    }
+    xmlhttp.open("GET", theUrl, false );
+    xmlhttp.send();
+}
+
+function sendMessage(ip){
+    let theUrl = 'http://' + """ HOSTNAME """ + '/message/' + ip;xmlhttp=new XMLHttpRequest();
+    xmlhttp.onreadystatechange=()=>{
+        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+        {
+            getTimes();
+        }
+    }
+    xmlhttp.open("GET", theUrl, false );
+    xmlhttp.send();
+}
+""" +
+        "</script></head><body>" +
+        "<input type='button' value='Event' onclick='sendEvent();' />" +
+        "".join([f"<input type='button' value='Message {instance}' onclick='sendMessage({ip});' />" for instance,ip in ips.items()]) +
+        "<input type='button' value='Get Clocks' onclick='getTimes();' />" +
         "</body></html>"
     )
     
    
 @app.route("/time")
 def times():
+    return f"{local_time(app.counter)}"
+
+@app.route("/event")
+def get_event():
+    event(HOSTNAME, app.counter)
+    return f"{local_time(app.counter)}"
+
+@app.route("/message/<instance>")
+def message(instance):
+    send_message(f'http://{ips[instance]}', HOSTNAME, app.counter)
     return f"{local_time(app.counter)}"
