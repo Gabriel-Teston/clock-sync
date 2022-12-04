@@ -97,5 +97,5 @@ def message():
 @app.route("/message/<instance>")
 def message_(instance):
     #send_message(f'http://{ips[instance]}', HOSTNAME, app.counter)
-    x = requests.post(f'http://{ips[instance]}/message', json = {'timestamp': counter.value()})
+    x = requests.post(f'http://{ips[instance]}/message', json = {'timestamp': app.counter.value()})
     return f"{local_time(app.counter)}"
