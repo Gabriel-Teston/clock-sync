@@ -64,7 +64,7 @@ def calc_recv_timestamp(recv_time_stamp, counter):
 def event(hostname, counter):
     counter.increment()
     print('Something happened in {} !'.\
-          format(hostname) + local_time(counter.value()))
+          format(hostname) + local_time(counter))
 
 def send_message(ip, hostname, counter):
     counter.increment()
