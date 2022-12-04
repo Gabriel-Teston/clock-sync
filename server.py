@@ -85,5 +85,5 @@ def get_event():
 
 @app.route("/message/<instance>")
 def message(instance):
-    send_message(ips[instance], HOSTNAME, app.counter)
+    send_message(f'http://{ips[instance]}', HOSTNAME, app.counter)
     return f"{local_time(app.counter)}"
