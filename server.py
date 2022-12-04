@@ -7,7 +7,7 @@ base_metadata_url = "http://metadata.google.internal/computeMetadata/v1/instance
 ips = {
     "instance-from-template-a": requests.get(f"{base_metadata_url}instance_a_address").text,
     "instance-from-template-b": requests.get(f"{base_metadata_url}instance_b_address").text,
-    "instance-from-template-c": requests.get(f"{base_metadata_url}instance_c_address").text"
+    "instance-from-template-c": requests.get(f"{base_metadata_url}instance_c_address").text
 }
 
 app = Flask(__name__)
