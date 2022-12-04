@@ -47,7 +47,7 @@ function sendEvent(){
     xmlhttp.onreadystatechange=()=>{
         if (xmlhttp.readyState==4 && xmlhttp.status==200)
         {
-            getTimes();
+            updateTimes();
         }
     }
     xmlhttp.open("GET", theUrl, false );
@@ -59,7 +59,7 @@ function sendMessage(ip){
     xmlhttp.onreadystatechange=()=>{
         if (xmlhttp.readyState==4 && xmlhttp.status==200)
         {
-            getTimes();
+            updateTimes();
         }
     }
     xmlhttp.open("GET", theUrl, false );
